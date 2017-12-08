@@ -1,45 +1,51 @@
 import requests
-# F6036466EC1574A73431ADEB21792D5B
-# match_url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key={}'
-# response = requests.get(match_url.format('F6036466EC1574A73431ADEB21792D5B'))
-# print(response)
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-# Make a get request to get the latest position of the international space station from the opennotify api.
-match_url = 'https://api.opendota.com/api/matches/{}'
+import pickle
+import os
+from w8m8 import w8m8
+from apikeys import steam_api
 
-corpus = []
-for i in range(2):
-    response = requests.get(match_url.format(3602154686 - i))
-    data = response.json()
-    radiant_win = data['radiant_win']
-    print(radiant_win)
-    # Print the status code of the response.
-    document = [[],[]]
-    if data['chat']:
-        for asf in data['chat']:
-            if asf['type'] == 'chat':
-                if radiant_win and asf['slot'] < 5:
-                    document[0].append(asf['key'])
-                    # fmt = '\033[92m{}\033[0m'
-                else:
-                    document[1].append(asf['key'])
-                    # fmt = '\033[91m{}\033[0m'
-                # print(fmt.format(asf['key']))
-        print('Added match to corpus')
-        corpus.append(document)
+def scrape(tot):
+    match_url = 'https://api.opendota.com/api/matches/{}'
+    if os.path.exists('corpus.p'):
+        corpus = pickle.load(open('corpus.p', 'rb'))
+        ids = [corpus[-1][0]]
     else:
-        print('No chat available')
-    #print('---')
-for win, lose in corpus:
-    for msg in win:
-        print('\033[92m{}\033[0m'.format(msg))
-    for msg in lose:
-        print('\033[91m{}\033[0m'.format(msg))
+        corpus = []
+        ids = []
+    i = 0
+    n = 0
+
+    while n < tot:
+        w8m8.progressbar(n/tot, i)
+        try:
+            if not i % 100:
+                matches_url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key={}&matches_requested=100&skill=3'
+                if ids:
+                    matches_url += '&start_at_match_id=%s' % ids[-1]
+                response = requests.get(matches_url.format(steam_api))
+                ids = [match['match_id'] for match in response.json()['result']['matches']]
+                if len(ids) == 0:
+                    continue
+            
+            match_id = ids[i % len(ids)]
+
+            response = requests.get(match_url.format(match_id))
+            data = response.json()
+            i += 1
+            
+            if not data.get('radiant_win') or not data.get('chat'):
+                continue
+            
+            document = {}
+            for msg in data['chat']:
+                if msg['type'] == 'chat':
+                    document[msg['slot']] = document.get(msg['slot'], []) + [msg['key']]
+            corpus.append((match_id, data['radiant_win'], document))
+            n += 1
+        except Exception as error:
+            print(error)
+    w8m8.progressbar(n/tot)
+    pickle.dump(corpus, open('corpus.p', 'wb'))
+
+
+
