@@ -1,0 +1,16 @@
+Most Informative Features
+                     sdi = 2                 win : lose   =      1.2 : 1.0
+                     sdi = 1                lose : win    =      1.1 : 1.0
+
+Win:
+Precision: 58.98%
+Recall: 42.94%
+F-measure: 49.70%
+
+Lose:
+Precision: 55.14%
+Recall: 70.14%
+F-measure: 61.74%
+
+Individual accuracy: 56.54%
+Match accuracy: 27.78%

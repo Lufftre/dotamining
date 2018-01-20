@@ -1,0 +1,34 @@
+Most Informative Features
+              word(миду) = True             lose : win    =      9.7 : 1.0
+                word(wa) = True              win : lose   =      7.7 : 1.0
+             word(menya) = True             lose : win    =      7.0 : 1.0
+            word(уебище) = True             lose : win    =      7.0 : 1.0
+          word(straight) = True             lose : win    =      6.3 : 1.0
+           word(hahahha) = True             lose : win    =      6.3 : 1.0
+                word(hc) = True             lose : win    =      6.3 : 1.0
+           word(garbage) = True             lose : win    =      5.7 : 1.0
+            word(picked) = True             lose : win    =      5.7 : 1.0
+            word(сосать) = True              win : lose   =      5.7 : 1.0
+               word(всё) = True             lose : win    =      5.7 : 1.0
+          word(jebaited) = True              win : lose   =      5.4 : 1.0
+                word(af) = True             lose : win    =      5.0 : 1.0
+             word(fault) = True              win : lose   =      5.0 : 1.0
+               word(job) = True             lose : win    =      5.0 : 1.0
+              word(def?) = True              win : lose   =      5.0 : 1.0
+                word(za) = True             lose : win    =      5.0 : 1.0
+             word(recon) = True              win : lose   =      5.0 : 1.0
+              word(gave) = True              win : lose   =      5.0 : 1.0
+            word(finish) = True             lose : win    =      5.0 : 1.0
+
+Win:
+Precision: 57.38%
+Recall: 74.65%
+F-measure: 64.89%
+
+Lose:
+Precision: 63.74%
+Recall: 44.56%
+F-measure: 52.45%
+
+Individual accuracy: 59.61%
+Match accuracy: 70.72%

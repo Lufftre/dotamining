@@ -1,0 +1,34 @@
+Most Informative Features
+              word(миду) = True             lose : win    =      9.7 : 1.0
+       bigram(me report) = True             lose : win    =      9.7 : 1.0
+       bigram(lol hahah) = True              win : lose   =      9.7 : 1.0
+      bigram(commend me) = True              win : lose   =      7.8 : 1.0
+      bigram(gg commend) = True              win : lose   =      7.7 : 1.0
+      bigram(lol hahaha) = True              win : lose   =      7.7 : 1.0
+      bigram(report him) = True             lose : win    =      7.7 : 1.0
+                word(wa) = True              win : lose   =      7.7 : 1.0
+          bigram(gg end) = True             lose : win    =      7.6 : 1.0
+             word(menya) = True             lose : win    =      7.0 : 1.0
+            word(уебище) = True             lose : win    =      7.0 : 1.0
+          bigram(ez lol) = True              win : lose   =      7.0 : 1.0
+        bigram(hahah ez) = True              win : lose   =      7.0 : 1.0
+           bigram(gg go) = True             lose : win    =      6.3 : 1.0
+                word(hc) = True             lose : win    =      6.3 : 1.0
+         bigram(mid and) = True             lose : win    =      6.3 : 1.0
+           word(hahahha) = True             lose : win    =      6.3 : 1.0
+         bigram(sf haha) = True              win : lose   =      6.3 : 1.0
+      bigram(end report) = True             lose : win    =      6.3 : 1.0
+          bigram(with u) = True             lose : win    =      6.3 : 1.0
+
+Win:
+Precision: 61.75%
+Recall: 79.40%
+F-measure: 69.47%
+
+Lose:
+Precision: 71.15%
+Recall: 50.81%
+F-measure: 59.28%
+
+Individual accuracy: 65.10%
+Match accuracy: 72.69%

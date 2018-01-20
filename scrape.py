@@ -1,66 +1,43 @@
 import requests
 import pickle
 import os
-from w8m8 import w8m8
+import w8m8
 from apikeys import steam_api
 
-def get_matchids(match_id=None):
-    matches_url = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key={}&matches_requested=100&skill=3&lobby_type=7'.format(steam_api)
-    if match_id:
-        matches_url += '&start_at_match_id={}'.format(match_id)
+def scrape(n, corpus=[]):
 
-    print('STEAM API CALL')
+    matches_url = 'https://api.opendota.com/api/explorer?sql=select%20match_id,radiant_win,duration,avg_mmr%20from%20public_matches%20where%20duration%20%3E%20900%20and%20lobby_type%20=%207%20and%20avg_mmr%20%3E%203000%20order%20by%20match_id%20desc%20limit%2010000'
+
     response = requests.get(matches_url)
-    try:
-        data = response.json()
-    except Exception as error:
-        print('Failed to get match ids')
-        return None
+    data = response.json()
+    c = 0
+    for i, row in enumerate(data['rows']):
+        try:
+            chat = get_chatlog(row['match_id'])
+        except Exception:
+            chat = {}
 
-    ids = [match['match_id'] for match in data['result']['matches']]
-    return ids
+        if chat:
+            corpus.append((row['match_id'], row['radiant_win'], row['duration'], row['avg_mmr'], chat))
+            c += 1
+        w8m8.progressbar(c/n)
+        if c == n:
+            break
+
+    return corpus
 
 
 def get_chatlog(match_id):
     match_url = 'https://api.opendota.com/api/matches/{}'
-
-    print('OPENDOTA API CALL:', match_id)
     response = requests.get(match_url.format(match_id))
-    try:
-        data = response.json()
-    except Exception as error:
-        print('Failed to get match detalis ({})'.format(match_id))
-        return None
-
-    if not data.get('radiant_win') or not data.get('chat'):
-        return None
-    
+    data = response.json()
     chatlog = {}
-    for msg in data['chat']:
-        if msg['type'] == 'chat':
-            chatlog[msg['slot']] = chatlog.get(msg['slot'], []) + [msg['key']]
+    if data.get('chat'):    
+        for msg in data['chat']:
+            if msg['type'] == 'chat':
+                chatlog[msg['slot']] = chatlog.get(msg['slot'], []) + [msg['key']]
+    return chatlog
 
-    return (match_id, data.get('radiant_win'), chatlog)
-
-
-def scrape(tot, corpus=[]):
-    
-    ids = [corpus[-1][0]] if corpus else []
-    n = 0
-    match_id = None
-    while n < tot:
-        w8m8.progressbar(n/tot)
-        while not ids:
-            ids = get_matchids(match_id) if match_id else get_matchids()
-        
-        match_id = ids.pop()
-        document = get_chatlog(match_id)
-        if document:
-            corpus.append(document)
-            n += 1
-
-    w8m8.progressbar(n/tot)
-    return corpus
-
-
-
+if __name__ == '__main__':
+    data = get_matchids()
+    print(data)

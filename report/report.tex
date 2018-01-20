@@ -1,0 +1,215 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{datetime2}
+\usepackage{parskip}
+\usepackage{spverbatim}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% \graphicspath{{plots/}}
+% \newcommand{\imgw}{0.8}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\lhead{TDDE16}
+\rhead{\today} % yyyy-mm-dd
+\setlength{\headheight}{15pt}
+
+\cfoot{\thepage}
+
+\begin{document}
+
+\begin{center}
+    \Huge
+    \textbf{Dota mining}
+
+    \vspace{0.3cm}
+    \large
+    Ludvig Noring \
+    ludno249
+
+\end{center}
+
+\section{Introduction}
+\subsection{Dota 2}
+Dota 2 is an online multiplayer game where ten players are divided into two teams,
+with the objective to destroy the opposing team's base.
+To achieve this all five players within a team depend on each others performance.
+The teams can communicate with each other using the in-game chat.
+
+From my personal experince of the online gaming culture
+people tend to be expressive in what ever means of communication available to them.
+A win is much more enjoyed if you can rub it in the opponents face.
+A individual mistake can be mitigated if you put the blame on your teammates.
+
+
+\section{Theory}
+\subsection{Naive Bayes}
+The Naive Bayes classifier will assign the most probable class given a feature vector.
+Bayesian classifiers in general all work this way but what puts the naive in naive bayes
+is that it assumes all features are independant of each other.
+This naive approach simplifies learning while still maintaining performance.
+
+When training the classifier a set of features need to be decided on.
+Since the same feature vector need to be used for all documents some preprocessing of the corpus
+might be needed.
+Then using this set of features a feature vector for each document in the training set is
+computed and fed to the classifier.
+Training the model falls under supervised learning so the correct class is needed together with the feature vector.
+With this information the classifier can calculate the probability for each class and the probability for each feature given a class.
+
+When the model is trained a new document can be introduced for classification.
+The document is parsed and features are extracted in the same way as in the training phase.
+The most probable class is the calculated by using the forumula below.
+The class which maximizes the forumala will be the predicted class.
+
+\subsection{Shanon Diversity Index}
+When investigating how diverse a data set is a diversity index can be used.
+It is used as a meassure of how many types or bins there are and how many there are in each bin.
+For example looking at the grades of a school class the bins would be the different grades
+and each student's grade would be placed in the appropriate bin.
+If the students have very diverse grades the bins would be of similar size and the diversity index would be high.
+If on the other hand a class was too difficult and many of the students failed the \textit{fail bin} would fill up
+and the diversity index would decrease.
+The index is calculated using the formula below where R is the number of bins. The index ranges from $0$ to $\ln{R}$.
+$$H' = -\sum_{i=1}^{R}p_i \ln{p_i}$$
+
+\subsection{N-grams}
+An n-gram is a set of words or letters of length n.
+They can be used for various applications such as langugage models for predicting following words letters.
+N-grams of length one is referd to as unigrams, length of two bigrams and length of three trigrams.
+
+\section{Method}
+\subsection{Collecting data}
+The first step towards creating our classifier is establishing a data set.
+\textit{opendota.com} offers a free api for collecting various data about dota 2 matches.
+The api was queried to return matches only in the above average skill level.
+This was to eliminate all practice matches against bots containing no chat,
+and also to make sure the players playing are familiar to the terminology of dota.
+Matches were nothing was written was discarded.
+No threshold was decided on creating the data set so matches containing only a single word was included.
+The filtering was done later when training the classifier.
+
+The chatlogs could only be retrevied from the api one match at a time.
+This resulted in a slow gathering of chatlogs.
+In response to this the corpus was built successively.
+
+\subsection{Naive Bayes Classifier}
+The classifier was implemented using the Python library \textit{nltk}.
+The library provides a generic Naive Bayes classifier complete with training and classifying methods.
+
+The classifier was extended with functionality to parse the corpus.
+Matches were both teams did not write five words or more were discarded.
+The chatlog was extracted together with information about what player said what,
+match duration and the match winner.
+Half of the corpus was used for training and the other half was used for testing.
+
+\subsubsection{Features}
+\label{sec:feats}
+After the corpus has been parsed it was be processed further to extract all unigrams, bigrams and trigrams.
+Many n-grams are only ocuring once throughout the corpus.
+This might be because of spelling or simply because the words or phrases are rarely used.
+These n-grams were considered irrelevant and discarded to decrease training time without affecting performance.
+When the classifier had built its vocabulary it could featurize all matches in the training set.
+The features used for the classifier are:
+\begin{itemize}
+    \item Unigrams
+    \item Bigrams
+    \item Trigrams
+    \item Words per 30 minutes (a game of Dota usually last around 30 minutes)
+    \item Shannon Diversity Index
+\end{itemize}
+The feature vector for each match contains boolean values for all features. All n-grams are an individual feature.
+If a chatlog contains an n-gram seen in training that n-gram would get the boolean value True and if not False.
+The other two features wp30 and sdi was digitized to $15$ values linearly distributed between $0$ and $100$
+and $0, 1, 2$ respectively.
+
+\subsubsection{Testing}
+When evalutaing the performance of the classifier worked logically very similar as the training phase.
+The testing set was first parsed in the same way as in training.
+Then each document could be featurized and fed into the classifier resulting in a probability for victory.
+Since each match has one winner and one loser the classifier can either try and predict each team's chatlog individually
+or it can decide which of the two teams is the most probable winner.
+In this project both methods were used and evaluated.
+
+\subsection{Basline System}
+A baseline system was created using the whole data set split up into 50\% training and 50\% testing.
+When training the baseline classifier the features were limited to only unigrams.
+The unigrams were extracted and trained upon in the same way as described in \ref{sec:feats}.
+
+\section{Result}
+In the later stages of the project the corpus contained a total of 3946 matches.
+The number of n-grams extracted from the training set i.e. half of the matches,
+can be seen in table \ref{tab:n-grams}
+
+\begin{table}[h]
+    \begin{center}
+        \begin{tabular}{r | c c}
+                        & Total & $>1$   \\
+            \hline
+            Unigrams    & 15492 & 4946 \\
+            Bigrams     & 57070 & 6103 \\
+            Trigrams    & 68684 & 1353 \\
+        \end{tabular}
+        \caption{N-gram frequency}
+        \label{tab:n-grams}
+    \end{center}
+\end{table}
+
+
+\begin{table}[h]
+    \begin{center}
+\begin{tabular}{ r | l l }
+                & Win       & Lose \\
+    \hline
+    Precision   & 57.38\%   & 63.74\% \\
+    Recall      & 74.65\%   & 44.56\% \\
+    F-Measure   & 64.89\%   & 52.45\% \\
+    %\hline
+    
+\end{tabular}
+
+\rule{0pt}{8ex}    
+\begin{tabular}{ l l }
+    Individual accuracy: & 59.61\% \\
+    Per match accuracy:  & 70.72\%\\
+\end{tabular}
+\caption{Baseline performance}
+\label{tab:baseline}
+\end{center}
+\end{table}
+
+%   Most Informative Features
+%   word(миду) = True             lose : win    =      9.7 : 1.0
+%     word(wa) = True              win : lose   =      7.7 : 1.0
+%  word(menya) = True             lose : win    =      7.0 : 1.0
+% word(уебище) = True             lose : win    =      7.0 : 1.0
+% word(straight) = True             lose : win    =      6.3 : 1.0
+% word(hahahha) = True             lose : win    =      6.3 : 1.0
+%     word(hc) = True             lose : win    =      6.3 : 1.0
+% word(garbage) = True             lose : win    =      5.7 : 1.0
+% word(picked) = True             lose : win    =      5.7 : 1.0
+% word(сосать) = True              win : lose   =      5.7 : 1.0
+%    word(всё) = True             lose : win    =      5.7 : 1.0
+% word(jebaited) = True              win : lose   =      5.4 : 1.0
+%     word(af) = True             lose : win    =      5.0 : 1.0
+%  word(fault) = True              win : lose   =      5.0 : 1.0
+%    word(job) = True             lose : win    =      5.0 : 1.0
+%   word(def?) = True              win : lose   =      5.0 : 1.0
+%     word(za) = True             lose : win    =      5.0 : 1.0
+%  word(recon) = True              win : lose   =      5.0 : 1.0
+%   word(gave) = True              win : lose   =      5.0 : 1.0
+% word(finish) = True             lose : win    =      5.0 : 1.0
+\section{Discussion}
+
+\section{Conclusion}
+
+% \newpage
+% \pagenumbering{gobble}
+% \appendix
+% \section{}
+\end{document}
