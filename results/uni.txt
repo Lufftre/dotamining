@@ -1,34 +1,60 @@
+Documents in corpus: 3963
+[████████████████████] 100.00% Parsing Corpus
+Train set: 2178
+18940 6173
+75703 8852
+94083 2097
+94520 443
+92742 173
+[████████████████████] 100.00% Training
 Most Informative Features
-              word(миду) = True             lose : win    =      9.7 : 1.0
-                word(wa) = True              win : lose   =      7.7 : 1.0
-             word(menya) = True             lose : win    =      7.0 : 1.0
-            word(уебище) = True             lose : win    =      7.0 : 1.0
-          word(straight) = True             lose : win    =      6.3 : 1.0
-           word(hahahha) = True             lose : win    =      6.3 : 1.0
-                word(hc) = True             lose : win    =      6.3 : 1.0
-           word(garbage) = True             lose : win    =      5.7 : 1.0
-            word(picked) = True             lose : win    =      5.7 : 1.0
-            word(сосать) = True              win : lose   =      5.7 : 1.0
-               word(всё) = True             lose : win    =      5.7 : 1.0
-          word(jebaited) = True              win : lose   =      5.4 : 1.0
-                word(af) = True             lose : win    =      5.0 : 1.0
-             word(fault) = True              win : lose   =      5.0 : 1.0
-               word(job) = True             lose : win    =      5.0 : 1.0
-              word(def?) = True              win : lose   =      5.0 : 1.0
-                word(za) = True             lose : win    =      5.0 : 1.0
-             word(recon) = True              win : lose   =      5.0 : 1.0
-              word(gave) = True              win : lose   =      5.0 : 1.0
-            word(finish) = True             lose : win    =      5.0 : 1.0
-
+            word(throne) = True lose : win = 13.0 : 1.0
+              word(миду) = True lose : win = 10.3 : 1.0
+              word(боже) = True lose : win =  6.3 : 1.0
+            word(picked) = True lose : win =  6.3 : 1.0
+           word(cumback) = True  win : lose=  6.3 : 1.0
+          word(jebaited) = True  win : lose=  5.9 : 1.0
+             word(moron) = True lose : win =  5.7 : 1.0
+            word(crying) = True lose : win =  5.7 : 1.0
+                word(3k) = True lose : win =  5.3 : 1.0
+              word(hand) = True lose : win =  5.0 : 1.0
+             word(intro) = True  win : lose=  5.0 : 1.0
+                 word(x) = True lose : win =  5.0 : 1.0
+             word(their) = True lose : win =  5.0 : 1.0
+              word(bois) = True  win : lose=  5.0 : 1.0
+            word(заебал) = True lose : win =  5.0 : 1.0
+            word(jajaja) = True lose : win =  5.0 : 1.0
+             word(calla) = True lose : win =  5.0 : 1.0
+           word(buyback) = True  win : lose=  5.0 : 1.0
+           word(который) = True lose : win =  5.0 : 1.0
+                word(13) = True lose : win =  5.0 : 1.0
+None
+[████████████████████] 100.00% Parsing Corpus
+Test set: 2088
+[████████████████████] 100.00% Testing
+[████████████████████] 100.00% Testing
 Win:
-Precision: 57.38%
-Recall: 74.65%
-F-measure: 64.89%
+Precision: 57.27%
+Recall: 76.25%
+F-measure: 65.41%
 
 Lose:
-Precision: 63.74%
-Recall: 44.56%
-F-measure: 52.45%
+Precision: 64.47%
+Recall: 43.10%
+F-measure: 51.66%
 
-Individual accuracy: 59.61%
-Match accuracy: 70.72%
+Individual accuracy: 59.67%
+Match accuracy: 68.10%
+
+
+
+            \textit{midu}     & 1.0 : 9.7 \\
+            \textit{wa}       & 7.7 : 1.0 \\
+            \textit{menya}    & 1.0 : 7.0 \\
+            \textit{uëbiŝe}   & 1.0 : 7.0 \\
+            straight          & 1.0 : 6.3 \\
+            hahahha           & 1.0 : 6.3 \\
+            hc                & 1.0 : 6.3 \\
+            garbage           & 1.0 : 5.7 \\
+            picked            & 1.0 : 5.7 \\
+            \textit{sosat'}   & 5.7 : 1.0 \\

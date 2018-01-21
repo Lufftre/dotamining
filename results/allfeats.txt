@@ -1,0 +1,101 @@
+Documents in corpus: 3963
+[████████████████████] 100.00% Parsing Corpus
+Train set: 2178
+18940 6173
+75703 8852
+94083 2097
+94520 443
+92742 173
+[████████████████████] 100.00% Training
+Most Informative Features
+            word(throne) = True lose : win = 13.0 : 1.0
+      bigram(commend me) = True  win : lose= 12.6 : 1.0
+              word(миду) = True lose : win = 10.3 : 1.0
+      bigram(gg commend) = True  win : lose=  9.7 : 1.0
+      bigram(hahaha why) = True  win : lose=  9.0 : 1.0
+       bigram(me report) = True lose : win =  8.6 : 1.0
+    bigram(haha commend) = True  win : lose=  8.3 : 1.0
+       bigram(es report) = True lose : win =  8.3 : 1.0
+        bigram(hahah ez) = True  win : lose=  7.7 : 1.0
+        bigram(just end) = True lose : win =  7.6 : 1.0
+
+
+           bigram(me ez) = True              win : lose=  7.3 : 1.0
+          bigram(u need) = True              win : lose   =      7.0 : 1.0
+          bigram(he did) = True             lose : win    =      7.0 : 1.0
+       bigram(xd report) = True             lose : win    =      7.0 : 1.0
+        trigram(e ez ez) = True              win : lose   =      7.0 : 1.0
+      bigram(end report) = True             lose : win    =      7.0 : 1.0
+            word(picked) = True             lose : win    =      6.3 : 1.0
+           word(cumback) = True              win : lose   =      6.3 : 1.0
+          bigram(aim me) = True              win : lose   =      6.3 : 1.0
+              word(боже) = True             lose : win    =      6.3 : 1.0
+None
+[████████████████████] 100.00% Parsing Corpus
+Test set: 2088
+[████████████████████] 100.00% Testing
+[████████████████████] 100.00% Testing
+Win:
+Precision: 60.97%
+Recall: 78.54%
+F-measure: 68.65%
+
+Lose:
+Precision: 69.85%
+Recall: 49.71%
+F-measure: 58.09%
+
+Individual accuracy: 64.13%
+Match accuracy: 74.52%
+
+
+
+
+
+
+
+
+
+
+
+Documents in corpus: 3963
+[████████████████████] 100.00% Parsing Corpus
+Train set: 3338
+[████████████████████] 100.00% Training
+Most Informative Features
+      bigram(end report) = True             lose : win    =     15.0 : 1.0
+   bigram(please report) = True             lose : win    =     11.0 : 1.0
+            word(throne) = True             lose : win    =     10.6 : 1.0
+      bigram(hahaha why) = True              win : lose   =     10.3 : 1.0
+       bigram(es report) = True             lose : win    =     10.3 : 1.0
+               word(rep) = True             lose : win    =     10.3 : 1.0
+            word(несите) = True             lose : win    =      9.7 : 1.0
+      bigram(wp commend) = True              win : lose   =      9.0 : 1.0
+       bigram(still def) = True              win : lose   =      8.3 : 1.0
+          bigram(wp end) = True             lose : win    =      7.7 : 1.0
+     bigram(game hahaha) = True              win : lose   =      7.7 : 1.0
+               word(два) = True             lose : win    =      7.7 : 1.0
+              word(ruin) = True             lose : win    =      7.7 : 1.0
+       bigram(me report) = True             lose : win    =      7.6 : 1.0
+         bigram(end rep) = True             lose : win    =      7.0 : 1.0
+         bigram(по миду) = True             lose : win    =      7.0 : 1.0
+           bigram(wp ty) = True              win : lose   =      7.0 : 1.0
+        bigram(you just) = True             lose : win    =      7.0 : 1.0
+      bigram(idiot team) = True             lose : win    =      7.0 : 1.0
+       bigram(back haha) = True              win : lose   =      7.0 : 1.0
+[████████████████████] 100.00% Parsing Corpus
+Test set: 928
+[████████████████████] 100.00% Testing
+[████████████████████] 100.00% Testing
+Win:
+Precision: 61.04%
+Recall: 75.65%
+F-measure: 67.56%
+
+Lose:
+Precision: 67.99%
+Recall: 51.72%
+F-measure: 58.75%
+
+Individual accuracy: 63.69%
+Match accuracy: 76.51%

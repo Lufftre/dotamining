@@ -41,8 +41,8 @@ def main():
     selected_feats += ['wp30'] if args.wp30 else []
     selected_feats += ['sdi'] if args.sdi else []
 
-    train = corpus[:len(corpus)//2]
-    test = corpus[len(corpus)//2:]
+    train = corpus[:int(len(corpus)*0.75)]
+    test = corpus[int(len(corpus)*0.75):]
     if args.train:
         naiveBoi.train(train, selected_feats)
         pickle.dump(naiveBoi, open(args.classifier, 'wb'))

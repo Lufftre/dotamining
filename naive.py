@@ -3,8 +3,9 @@ from nltk.metrics.scores import precision, recall, f_measure
 from nltk.corpus import stopwords
 from collections import Counter
 import w8m8
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy
+import math
 thresh = 5
 
 
@@ -68,7 +69,7 @@ class NaiveBoi(NaiveBayesClassifier):
             nchars = {0:0,1:0,2:0,3:0,4:0}
             for player, message in extra:
                 nchars[player] += len(message)
-            bins = numpy.linspace(0, 2, 3)
+            bins = numpy.linspace(0, math.log(5), 5)
             features['sdi'] = int(numpy.digitize(sdi(nchars), bins))
 
 
@@ -112,27 +113,27 @@ class NaiveBoi(NaiveBayesClassifier):
         # # unigram
         self.unigrams = Counter([word for chat,win,duration,extra in train_set for word in chat])
         self.common_unigrams = [unigram for unigram, value in self.unigrams.items() if value > 1]
-        print(len(self.unigrams), len(self.common_unigrams))
+        # print(len(self.unigrams), len(self.common_unigrams))
 
         # # bigram
         self.bigrams = Counter([' '.join((word, chat[i+1])) for chat,win,duration,extra in train_set for i,word in enumerate(chat[:-1])])
         self.common_bigrams = [bigram for bigram, value in self.bigrams.items() if value > 1]
-        print(len(self.bigrams), len(self.common_bigrams))
+        # print(len(self.bigrams), len(self.common_bigrams))
         # # trigram
         self.trigrams = Counter([' '.join((word, chat[i+1], chat[i+2])) for chat,win,duration,extra in train_set for i,word in enumerate(chat[:-2])])
         self.common_trigrams = [trigram for trigram, value in self.trigrams.items() if value > 1]
-        print(len(self.trigrams), len(self.common_trigrams))
+        # print(len(self.trigrams), len(self.common_trigrams))
         # # fourgram
         self.fourgrams = Counter([' '.join((word, chat[i+1], chat[i+2], chat[i+3])) for chat,win,duration,extra in train_set for i,word in enumerate(chat[:-3])])
         self.common_fourgrams = [fourgram for fourgram, value in self.fourgrams.items() if value > 1]
-        print(len(self.fourgrams), len(self.common_fourgrams))
+        # print(len(self.fourgrams), len(self.common_fourgrams))
         # # fivegram
         self.fivegrams = Counter([' '.join((word, chat[i+1], chat[i+2], chat[i+3], chat[i+4])) for chat,win,duration,extra in train_set for i,word in enumerate(chat[:-4])])
         self.common_fivegrams = [fivegram for fivegram, value in self.fivegrams.items() if value > 1]
-        print(len(self.fivegrams), len(self.common_fivegrams))
+        # print(len(self.fivegrams), len(self.common_fivegrams))
 
         ###### WP30 PLOT #######
-        # wp30s = [len(document) // (duration / 1800) for document,win,duration in train_set]
+        # wp30s = [len(chat) // (duration / 1800) for chat,win,duration,extra in train_set]
         # n, bins, patches = plt.hist(wp30s, 100,alpha=0.75)
         # plt.show()
         # self.doclen = Counter([len(chat) for chat,win,duration in train_set])
@@ -155,7 +156,7 @@ class NaiveBoi(NaiveBayesClassifier):
             features = self.get_features(chat, duration, extra, selected_feats)
             t.append((features, win))
         self.classifier = NaiveBayesClassifier.train(t)  
-        print(self.classifier.show_most_informative_features(20))
+        self.classifier.show_most_informative_features(20)
 
     def test(self, corpus, selected_feats):
         test_set = self.parse_corpus(corpus)

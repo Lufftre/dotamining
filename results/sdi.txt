@@ -1,16 +1,31 @@
+Documents in corpus: 3963
+[████████████████████] 100.00% Parsing Corpus
+Train set: 2178
+18940 6173
+75703 8852
+94083 2097
+94520 443
+92742 173
+[████████████████████] 100.00% Training
 Most Informative Features
-                     sdi = 2                 win : lose   =      1.2 : 1.0
-                     sdi = 1                lose : win    =      1.1 : 1.0
-
+                     sdi = 4                 win : lose   =      1.6 : 1.0
+                     sdi = 1                lose : win    =      1.6 : 1.0
+                     sdi = 2                lose : win    =      1.1 : 1.0
+                     sdi = 3                 win : lose   =      1.1 : 1.0
+None
+[████████████████████] 100.00% Parsing Corpus
+Test set: 2088
+[████████████████████] 100.00% Testing
+[████████████████████] 100.00% Testing
 Win:
-Precision: 58.98%
-Recall: 42.94%
-F-measure: 49.70%
+Precision: 53.85%
+Recall: 58.24%
+F-measure: 55.96%
 
 Lose:
-Precision: 55.14%
-Recall: 70.14%
-F-measure: 61.74%
+Precision: 54.54%
+Recall: 50.10%
+F-measure: 52.22%
 
-Individual accuracy: 56.54%
-Match accuracy: 27.78%
+Individual accuracy: 54.17%
+Match accuracy: 39.08%

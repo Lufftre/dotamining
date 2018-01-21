@@ -1,34 +1,47 @@
+Documents in corpus: 3963
+[████████████████████] 100.00% Parsing Corpus
+Train set: 2178
+18940 6173
+75703 8852
+94083 2097
+94520 443
+92742 173
+[████████████████████] 100.00% Training
 Most Informative Features
- trigram(haha haha haha) = True              win : lose   =      9.0 : 1.0
-       trigram(xd xd xd) = True              win : lose   =      5.0 : 1.0
-trigram(haha hahaha hahaha) = True              win : lose   =      3.8 : 1.0
+        trigram(e ez ez) = True              win : lose   =      7.0 : 1.0
+ trigram(haha haha haha) = True              win : lose   =      5.6 : 1.0
+    trigram(ez mid haha) = True              win : lose   =      5.0 : 1.0
+     trigram(ez game ez) = True              win : lose   =      5.0 : 1.0
+trigram(hahaha hahahaha hahaha) = True              win : lose   =      4.3 : 1.0
+     trigram(haha ez ez) = True              win : lose   =      4.3 : 1.0
+trigram(haha hahaha hahaha) = True              win : lose   =      4.2 : 1.0
+     trigram(let us end) = True              win : lose   =      4.2 : 1.0
+        trigram(z ez ez) = True              win : lose   =      3.9 : 1.0
+        trigram(ez ez e) = True              win : lose   =      3.9 : 1.0
+trigram(hahaha hahaha hahah) = True              win : lose   =      3.8 : 1.0
+       trigram(ez ez ez) = True              win : lose   =      3.7 : 1.0
+    trigram(sad sad sad) = True              win : lose   =      3.7 : 1.0
          trigram(? ? ez) = True              win : lose   =      3.7 : 1.0
-    trigram(i dont care) = True             lose : win    =      3.7 : 1.0
-        trigram(z ez ez) = True              win : lose   =      3.0 : 1.0
-        trigram(ez ez e) = True              win : lose   =      3.0 : 1.0
-trigram(hahaha hahaha hahah) = True              win : lose   =      3.0 : 1.0
-       trigram(ez ez ez) = True              win : lose   =      3.0 : 1.0
-    trigram(the fuck is) = True              win : lose   =      3.0 : 1.0
-  trigram(dont know how) = True              win : lose   =      3.0 : 1.0
+       trigram(wp gg wp) = True              win : lose   =      3.7 : 1.0
+       trigram(xd xd xd) = True              win : lose   =      3.2 : 1.0
     trigram(just let us) = True              win : lose   =      3.0 : 1.0
-trigram(hahaha hahahaha hahaha) = True              win : lose   =      3.0 : 1.0
-      trigram(go end no) = True             lose : win    =      3.0 : 1.0
-     trigram(ez game ez) = True              win : lose   =      3.0 : 1.0
-       trigram(xd gg gg) = True             lose : win    =      3.0 : 1.0
-      trigram(gg ez mid) = True             lose : win    =      3.0 : 1.0
+    trigram(i dont want) = True             lose : win    =      3.0 : 1.0
+       trigram(? fuck u) = True             lose : win    =      3.0 : 1.0
      trigram(иди на хуй) = True              win : lose   =      3.0 : 1.0
-  trigram(haha galit na) = True             lose : win    =      3.0 : 1.0
-       trigram(gg gg wp) = True              win : lose   =      3.0 : 1.0
-
+None
+[████████████████████] 100.00% Parsing Corpus
+Test set: 2088
+[████████████████████] 100.00% Testing
+[████████████████████] 100.00% Testing
 Win:
-Precision: 63.93%
-Recall: 20.72%
-F-measure: 31.29%
+Precision: 60.18%
+Recall: 25.19%
+F-measure: 35.52%
 
 Lose:
-Precision: 52.69%
-Recall: 88.31%
-F-measure: 66.00%
+Precision: 52.70%
+Recall: 83.33%
+F-measure: 64.56%
 
-Individual accuracy: 54.51%
-Match accuracy: 33.33%
+Individual accuracy: 54.26%
+Match accuracy: 38.31%
